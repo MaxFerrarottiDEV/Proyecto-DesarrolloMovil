@@ -14,9 +14,11 @@ export default function AppNavigator() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={{
-          tabBarStyle: { backgroundColor: "#005187" }, // Color de fondo de la barra de navegación
-          tabBarActiveTintColor: "#ffffff", // Color de las letras activas
-          tabBarInactiveTintColor: "#ffffff", // Color de las letras inactivas
+          tabBarStyle: { backgroundColor: "#005187" }, // Color de fondo de la barra inferior
+          tabBarActiveTintColor: "#ffffff", // Color de las letras activas en la barra inferior
+          tabBarInactiveTintColor: "#ffffff", // Color de las letras inactivas en la barra inferior
+          headerStyle: { backgroundColor: "#005187" }, // Color de fondo del header superior
+          headerTintColor: "#ffffff", // Color del texto en el header superior
         }}
       >
         <Tab.Screen name="Inicio" component={HomeScreen} />
