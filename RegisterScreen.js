@@ -2,10 +2,10 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-export default function SubjectsScreen() {
+export default function RegisterScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Lista de Materias</Text>
+      <Text style={styles.title}>Modulo de inscripciones</Text>
     </View>
   );
 }
@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#c4dafa",
   },
   title: {
     fontSize: 24,
