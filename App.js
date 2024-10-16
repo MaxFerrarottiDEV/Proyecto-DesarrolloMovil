@@ -1,35 +1,29 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, Button } from "react-native";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import LoginScreen from './js/LoginScreen';  // Asegúrate que esta ruta sea correcta
+import HomeScreen from './js/HomeScreen';    // Verifica que esta ruta esté bien
+import RegisterScreen from './js/RegisterScreen'; 
 
-import saludo from "./assets/saludo.jpg";
+const Stack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
-      <Image
-        source={saludo}
-        style={{
-          width: 100,
-          height: 100,
-          resizeMode: "center",
-        }}
-      />
-      <Text>Hola, Bienvenido a mi primera APP</Text>
-      <StatusBar style="auto" />
-      <Button
-        title="Boton Nativo - Pulsa aquí"
-        onPress={() => alert("Funcion en progreso...")}
-      />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen 
+          name="Inicio de Sesion" 
+          component={LoginScreen} 
+          options={{
+            headerStyle: { backgroundColor: '#3498db' }, // Cambia el color de fondo
+            headerTintColor: '#fff', // Cambia el color del texto
+          }} 
+        />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Registro" component={RegisterScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default App;
