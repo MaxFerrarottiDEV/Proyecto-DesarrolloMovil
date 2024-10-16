@@ -11,8 +11,6 @@ export default function ProfileScreen() {
       />
       <Text style={styles.nombre_perfil}>Hola, (nombre de usuario)</Text>
 
-      {/* Contenedor para alinear ambos textos pulsables */}
-      <View style={styles.rowContainer}>
         {/* Hacer el texto pulsable con TouchableOpacity */}
         <TouchableOpacity onPress={() => alert("Funcion en progreso...")}>
           <Text style={styles.change_password}>Cambiar contraseña</Text>
@@ -22,7 +20,6 @@ export default function ProfileScreen() {
         <TouchableOpacity onPress={() => alert("Funcion en progreso...")}>
           <Text style={styles.change_username}>Cambiar nombre de usuario</Text>
         </TouchableOpacity>
-      </View>
 
       <Button
         title="Cerrar Sesión"
@@ -50,23 +47,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 15,
   },
-  rowContainer: {
-    flexDirection: 'row', // Coloca los textos en fila
-    justifyContent: 'space-between', // Espacio entre los textos
-    width: '80%', // Ajusta el ancho del contenedor
-    marginBottom: 40,
-  },
   change_password: {
     fontSize: 16, // Tamaño de la fuente (ajustable)
-    flex: 1, // Esto asegura que ocupe espacio equitativo
     color: "#0000ff", // Añadir color para distinguirlo como un link
     textDecorationLine: 'underline', // Subrayar el texto
+    marginBottom: 20, // Espacio debajo del texto
   },
   change_username: {
     fontSize: 16, // Tamaño de la fuente (ajustable)
-    flex: 1, // Esto asegura que ocupe espacio equitativo
     textAlign: 'right', // Alinea el texto a la derecha
     color: "#0000ff", // Añadir color para distinguirlo como un link
     textDecorationLine: 'underline', // Subrayar el texto
+    marginBottom: 30, // Espacio debajo del texto
   },
 });
