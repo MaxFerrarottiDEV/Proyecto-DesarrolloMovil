@@ -10,8 +10,6 @@ expo install @expo-google-fonts/inter expo-font expo-app-loading
 
 npx expo install expo-system-ui
 
-npm install --save react-native-snap-carousel
-
 npm install @react-navigation/native
 
 npm install @react-navigation/bottom-tabs
