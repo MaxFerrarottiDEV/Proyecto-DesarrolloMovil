@@ -4,8 +4,6 @@ npm cache clean --forcé (es solo un comando opcional)
 
 npm install react-native-web react-dom
 
-npx expo install react-native-safe-area-context
-
 npx expo install expo-system-ui
 
 npm install @react-navigation/native
