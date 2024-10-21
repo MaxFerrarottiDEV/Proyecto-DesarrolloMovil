@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from "react";
-import { Text } from "react-native";
-import AppNavigator from "./AppNavigator";
+import { Text, View, ActivityIndicator } from "react-native";
+import AppNavigator from "./screens/AppNavigator";
 import { useFonts, Rubik_400Regular } from "@expo-google-fonts/rubik";
 import * as SplashScreen from "expo-splash-screen";
 
@@ -29,6 +29,16 @@ export default function App() {
   defaultTextProps.style = { fontFamily: "Rubik_400Regular" };
   Text.defaultProps = defaultTextProps;
 
-  // Retornar el AppNavigator
+  // Mostrar una pantalla de carga temporal si las fuentes no están listas
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#0000ff" /> 
+      </View>
+    );
+  }
+
+  // Retornar el AppNavigator cuando las fuentes estén cargadas
   return <AppNavigator />;
 }
+

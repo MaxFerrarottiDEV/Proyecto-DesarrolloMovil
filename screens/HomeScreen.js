@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation }) {
       
       {/* Añadir imagen después del subtítulo */}
       <Image
-        source={require('./assets/Carrusel_1.jpg')} // Ruta de la imagen
+        source={require('../assets/Carrusel_1.jpg')} // Ruta de la imagen
         style={styles.image}  // Estilos para la imagen
       />
       
@@ -25,13 +25,26 @@ export default function HomeScreen({ navigation }) {
       
       {/* Carta de presentación */}
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>Inscripciones:</Text>
+        <Text style={styles.cardTitle}>Inscripciones - Solicitudes de Preinscripcion:</Text>
         <Text style={styles.cardText}>
-          Permite gestionar solicitudes de inscripción de nuevos candidatos y revisar o actualizar la información de los estudiantes ya registrados.
+          Permite gestionar inscripciones de candidatos mediante un formulario integrado en la plataforma. Una vez completada la solicitud, esta se registra automáticamente en la tabla de 
+          solicitudes para su seguimiento y gestión.
         </Text>
         <Button
-          title="Ir a Inscripciones"
-          onPress={() => navigation.navigate("Inscripciones")}
+          title="Ir a Solicitudes"
+          onPress={() => navigation.navigate("Solicitudes")}
+          color="#005187" // Color del botón
+        />
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Inscripciones - Consultas de Datos estudiantiles:</Text>
+        <Text style={styles.cardText}>
+          Proporciona una tabla con el listado completo de los estudiantes inscritos en el profesorado. Además, permite adjuntar un legajo digital, modificar la información del estudiante 
+          y eliminar su registro en caso de abandono de la carrera.
+        </Text>
+        <Button
+          title="Ir a Consultas"
+          onPress={() => navigation.navigate("Consultas")}
           color="#005187" // Color del botón
         />
       </View>
@@ -92,6 +105,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: "bold",
+    textAlign: "center",
     marginBottom: 10, // Espacio debajo del título
   },
   cardText: {
