@@ -19,3 +19,5 @@ expo install expo-font
 expo install @expo-google-fonts/rubik expo-font expo-app-loading
 
 npm install react-native-vector-icons
+
+npm install firebase
