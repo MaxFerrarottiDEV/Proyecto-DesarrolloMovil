@@ -1,6 +1,6 @@
 Una vez clonado el proyecto, dentro de la terminal ingresar los siguientes comandos:
 
-npm cache clean --forcé (es solo un comando situacional) 
+npm cache clean --force (es solo un comando situacional) 
 
 npm install react-native-web react-dom
 
