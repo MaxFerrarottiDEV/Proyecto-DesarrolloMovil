@@ -16,6 +16,7 @@ export default function HomeScreen({ navigation }) {
       />
       
       {/* Misión de la organización */}
+      <Text style={styles.titulomision}>Misión:</Text>
       <Text style={styles.mision}>
         “MEJORAR LA CALIDAD DE VIDA DE LAS PERSONAS CON DISCAPACIDAD AUDITIVA EN LA PROVINCIA DE SALTA A TRAVÉS DE UN SERVICIO INTEGRAL, 
         BASADO EN LOS VALORES INSTITUCIONALES DE LIBERTAD, HONESTIDAD,
@@ -60,8 +61,15 @@ const styles = StyleSheet.create({
   image: {
     width: 300,  // Ancho de la imagen
     height: 300, // Alto de la imagen
-    marginBottom: 30, // Espacio debajo de la imagen
+    marginBottom: 25, // Espacio debajo de la imagen
     backgroundColor: "#4d82bc"
+  },
+  titulomision:{
+    fontSize: 25,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+    marginBottom: 10,
   },
   mision: {
     textAlign: "center",
