@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useEffect } from "react";
 import { Text } from "react-native";
 import AppNavigator from "./AppNavigator";
