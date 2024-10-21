@@ -14,6 +14,8 @@ npm install react-native-screens react-native-safe-area-context
 
 expo install expo-splash-screen
 
+expo install expo-font
+
 expo install @expo-google-fonts/rubik expo-font expo-app-loading
 
 npm install react-native-vector-icons
