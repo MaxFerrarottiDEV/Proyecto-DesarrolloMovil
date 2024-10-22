@@ -9,7 +9,7 @@ import HomeScreen from "./HomeScreen";
 import ProfileScreen from "./ProfileScreen";
 import SolicitudScreen from "./SolicitudScreen";
 import SolicitudFormScreen from "./SolicitudFormScreen";
-import ConsultaScreen from "./ConsultaScreen";
+import GuiaScreen from "./GuiaScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -71,8 +71,8 @@ export default function AppNavigator() {
 
         {/* Pantalla de Consultas con icono "list-alt" */}
         <Tab.Screen
-          name="Consultas"
-          component={ConsultaScreen}
+          name="Guias"
+          component={GuiaScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <FontAwesome name="list-alt" color={color} size={size} />

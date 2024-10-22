@@ -1,27 +1,36 @@
 /* eslint-disable prettier/prettier */ 
 import React from "react";
-import { Text, StyleSheet, Image, ScrollView } from "react-native";
+import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
 
 /* ScrollView envuelve todo el contenido */
 export default function HomeScreen({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.container}> 
-      <Text style={styles.title}>Instituto de Formación Docente</Text>
-      <Text style={styles.subtitle}>Profesorado de Educación Especial con Orientación en Sordos e Hipoacúsicos</Text>
-      
-      {/* Añadir imagen después del subtítulo */}
-      <Image
-        source={require('../assets/Carrusel_1.jpg')} // Ruta de la imagen
-        style={styles.image}  // Estilos para la imagen
-      />
-      
-      {/* Misión de la organización */}
-      <Text style={styles.titulomision}>Misión:</Text>
-      <Text style={styles.mision}>
-        “MEJORAR LA CALIDAD DE VIDA DE LAS PERSONAS CON DISCAPACIDAD AUDITIVA EN LA PROVINCIA DE SALTA A TRAVÉS DE UN SERVICIO INTEGRAL, 
-        BASADO EN LOS VALORES INSTITUCIONALES DE LIBERTAD, HONESTIDAD,
-        RESPETO, SOLIDARIDAD Y EFICIENCIA”
-      </Text>
+      {/* Carta de presentación */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Inscripciones - Solicitudes de Preinscripcion:</Text>
+        <Text style={styles.cardText}>
+          Permite gestionar inscripciones de candidatos mediante un formulario integrado en la plataforma. Una vez completada la solicitud, esta se registra automáticamente en la tabla de 
+          solicitudes para su seguimiento y gestión.
+        </Text>
+        <Button
+          title="Ir a Solicitudes"
+          onPress={() => navigation.navigate("Solicitudes")}
+          color="#005187" // Color del botón
+        />
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Inscripciones - Consultas de Datos estudiantiles:</Text>
+        <Text style={styles.cardText}>
+          Proporciona una tabla con el listado completo de los estudiantes inscritos en el profesorado. Además, permite adjuntar un legajo digital, modificar la información del estudiante 
+          y eliminar su registro en caso de abandono de la carrera.
+        </Text>
+        <Button
+          title="Ir a Consultas"
+          onPress={() => navigation.navigate("Solicitudes")}
+          color="#005187" // Color del botón
+        />
+      </View>
     </ScrollView>
   );
 }
@@ -61,7 +70,6 @@ const styles = StyleSheet.create({
   mision: {
     textAlign: "center",
     marginBottom: 30,
-    lineHeight: 30,
     fontStyle: "italic"
   },
   card: {
