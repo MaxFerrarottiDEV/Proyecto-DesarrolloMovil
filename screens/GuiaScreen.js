@@ -6,16 +6,17 @@ import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
 export default function HomeScreen({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.container}> 
+      <Text style={styles.title}>Lista de Funciones</Text>
       {/* Carta de presentación */}
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>Inscripciones - Solicitudes de Preinscripcion:</Text>
+        <Text style={styles.cardTitle}>Inscripciones - Solicitudes de Inscripcion:</Text>
         <Text style={styles.cardText}>
           Permite gestionar inscripciones de candidatos mediante un formulario integrado en la plataforma. Una vez completada la solicitud, esta se registra automáticamente en la tabla de 
           solicitudes para su seguimiento y gestión.
         </Text>
         <Button
           title="Ir a Solicitudes"
-          onPress={() => navigation.navigate("Solicitudes")}
+          onPress={() => navigation.navigate("Inscripciones")}
           color="#005187" // Color del botón
         />
       </View>
@@ -27,7 +28,7 @@ export default function HomeScreen({ navigation }) {
         </Text>
         <Button
           title="Ir a Consultas"
-          onPress={() => navigation.navigate("Solicitudes")}
+          onPress={() => navigation.navigate("Inscripciones")}
           color="#005187" // Color del botón
         />
       </View>
@@ -46,31 +47,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
     fontWeight: "bold",
-    marginBottom: 10, // Espacio entre el título y el subtítulo
-  },
-  subtitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 20, // Espacio entre el subtítulo y la imagen
-  },
-  image: {
-    width: 300,  // Ancho de la imagen
-    height: 300, // Alto de la imagen
-    marginBottom: 25, // Espacio debajo de la imagen
-    backgroundColor: "#4d82bc"
-  },
-  titulomision:{
-    fontSize: 25,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-    textDecorationLine: 'underline',
-    marginBottom: 10,
-  },
-  mision: {
-    textAlign: "center",
-    marginBottom: 30,
-    fontStyle: "italic"
+    marginBottom: 15, // Espacio entre el título y el subtítulo
   },
   card: {
     width: '80%',

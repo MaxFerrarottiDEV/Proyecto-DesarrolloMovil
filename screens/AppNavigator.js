@@ -7,7 +7,7 @@ import { Text, TouchableOpacity, View, Image } from "react-native"; // Agregamos
 import FontAwesome from "react-native-vector-icons/FontAwesome"; // Importamos FontAwesome
 import HomeScreen from "./HomeScreen";
 import ProfileScreen from "./ProfileScreen";
-import SolicitudScreen from "./SolicitudScreen";
+import InscripcionScreen from "./InscripcionScreen";
 import SolicitudFormScreen from "./SolicitudFormScreen";
 import GuiaScreen from "./GuiaScreen";
 
@@ -60,8 +60,8 @@ export default function AppNavigator() {
 
         {/* Pantalla de Solicitudes con icono "list" */}
         <Tab.Screen
-          name="Solicitudes"
-          component={SolicitudScreen}
+          name="Inscripciones"
+          component={InscripcionScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <FontAwesome name="list" color={color} size={size} />

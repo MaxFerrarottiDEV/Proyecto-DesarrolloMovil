@@ -1,14 +1,13 @@
 /* eslint-disable prettier/prettier */ 
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 
 export default function RegisterScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Módulo de Solicitudes</Text>
       {/* Botón para ir a la pantalla de SolicitudFormScreen */}
       <Button
-        title="Agregar solicitud de preinscripcion"
+        title="Agregar inscripcion"
         onPress={() => navigation.navigate('SolicitudFormScreen')}  // Navegar hacia la pantalla de SolicitudFormScreen
         color="#005187" // Cambia el color del botón si lo deseas
       />
