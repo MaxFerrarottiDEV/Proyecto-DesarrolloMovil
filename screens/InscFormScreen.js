@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import { View, Button, TextInput, ScrollView, StyleSheet } from "react-native";
 
-const SolicitudFormScreen = () => {
+const InscFormScreen = () => {
 
     const [state, setState] = useState({
         nombre: '',
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SolicitudFormScreen
+export default InscFormScreen

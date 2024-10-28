@@ -8,15 +8,18 @@ import FontAwesome from "react-native-vector-icons/FontAwesome"; // Importamos F
 import HomeScreen from "./HomeScreen";
 import ProfileScreen from "./ProfileScreen";
 import InscripcionScreen from "./InscripcionScreen";
-import SolicitudFormScreen from "./SolicitudFormScreen";
+import InscFormScreen from "./InscFormScreen";
 import GuiaScreen from "./GuiaScreen";
+import RegisterScreen from "./RegisterScreen";
+import LoginScreen from "./LoginScreen";
+
 
 const Tab = createBottomTabNavigator();
 
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Tab.Navigator
+      <Tab.Navigator initialRouteName="Login"
         screenOptions={({ navigation }) => ({
           tabBarStyle: { backgroundColor: "#005187" }, // Color de fondo de la barra inferior
           tabBarActiveTintColor: "#ffffff", // Color de las letras activas en la barra inferior
@@ -48,6 +51,24 @@ export default function AppNavigator() {
         })}
       >
         {/* Pantalla de Inicio con icono "home" */}
+        <Tab.Screen 
+          name="Logins" 
+          component={LoginScreen} 
+          options={{
+            headerStyle: { backgroundColor: '#005187' },
+            headerTintColor: '#fff', // Cambia el color del texto
+            tabBarButton: () => null
+          }} 
+        />
+        <Tab.Screen  
+          name="Register" 
+          component={RegisterScreen}
+          options={{
+            headerStyle: { backgroundColor: '#005187' },
+            headerTintColor: '#005187',
+            tabBarButton: () => null
+          }} 
+          />
         <Tab.Screen
           name="Inicio"
           component={HomeScreen}
@@ -86,10 +107,20 @@ export default function AppNavigator() {
           options={{ tabBarButton: () => null }}
         />
         <Tab.Screen
-          name="SolicitudFormScreen"
-          component={SolicitudFormScreen}
+          name="Formulario de Inscripcion"
+          component={InscFormScreen}
           options={{ tabBarButton: () => null }}
         />
+        <Tab.Screen
+          name="Registro"
+          component={RegisterScreen}
+          options={{ tabBarButton: () => null }}
+        />
+        <Tab.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ tabBarButton: () => null }}
+        />      
       </Tab.Navigator>
     </NavigationContainer>
   );
