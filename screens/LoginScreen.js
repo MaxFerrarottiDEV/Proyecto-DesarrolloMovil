@@ -1,15 +1,21 @@
 /* eslint-disable prettier/prettier */
+/*
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Alert, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Alert, Image, TouchableOpacity, ScrollView } from 'react-native';
+*/
 //modulos firebase 
+/*
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; 
 import appFirebase from './firebase';
+*/
 //import imagenes
+/*
 import logo from '../assets/CriosF.png';
 import usuario from '../assets/usuario.png';
 import candado from '../assets/candado3.png';
 import hideIcon from '../assets/hide-solid-24.png';
 import showIcon from '../assets/show-solid-24.png';
+
 
 const auth = getAuth(appFirebase); //inicializar firebase
 
@@ -31,43 +37,45 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={logo} style={styles.logo} />
-      <Text style={styles.title}>Iniciar Sesión</Text>
-      
-      <View style={styles.inputConteiner}>
-        <Image source={usuario} style={styles.icono} />
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-      </View>
-      <View style={styles.inputConteiner}>
-        <Image source={candado} style={styles.icono} />
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry={!isPasswordVisible}
-          autoCapitalize="none"
-        />
-        <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
-          <Image source={isPasswordVisible ? showIcon : hideIcon} style={styles.icono} />
+    <ScrollView>
+      <View style={styles.container}>
+        <Image source={logo} style={styles.logo} />
+        <Text style={styles.title}>Iniciar Sesión</Text>
+        
+        <View style={styles.inputConteiner}>
+          <Image source={usuario} style={styles.icono} />
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </View>
+        <View style={styles.inputConteiner}>
+          <Image source={candado} style={styles.icono} />
+          <TextInput
+            style={styles.input}
+            placeholder="Contraseña"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!isPasswordVisible}
+            autoCapitalize="none"
+          />
+          <TouchableOpacity onPress={() => setIsPasswordVisible(!isPasswordVisible)}>
+            <Image source={isPasswordVisible ? showIcon : hideIcon} style={styles.icono} />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity onPress={handleLogin} style={styles.botonlogin}>
+          <Text style={styles.botonTextlogin}>Iniciar</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>        
+          <Text style={styles.botonTextR}>¿No tienes cuenta? Regístrate aquí</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity onPress={handleLogin} style={styles.botonlogin}>
-        <Text style={styles.botonTextlogin}>Iniciar</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => navigation.navigate('Register')}>        
-        <Text style={styles.botonTextR}>¿No tienes cuenta? Regístrate aquí</Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -139,3 +147,4 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
+*/

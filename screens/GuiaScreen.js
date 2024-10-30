@@ -9,22 +9,24 @@ export default function HomeScreen({ navigation }) {
       <Text style={styles.title}>Lista de Funciones</Text>
       {/* Carta de presentación */}
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>Inscripciones - Solicitudes de Inscripcion:</Text>
+        <Text style={styles.cardTitle}>Inscripciones - Formulario de Inscripcion:</Text>
         <Text style={styles.cardText}>
-          Permite gestionar inscripciones de candidatos mediante un formulario integrado en la plataforma. Una vez completada la solicitud, esta se registra automáticamente en la tabla de 
-          solicitudes para su seguimiento y gestión.
+          Permite gestionar inscripciones de candidatos mediante un formulario integrado en la plataforma. 
+          Una vez completada la solicitud, esta se registra automáticamente en la tabla de solicitudes para su seguimiento
+          y gestión.
         </Text>
         <Button
-          title="Ir a Solicitudes"
-          onPress={() => navigation.navigate("Inscripciones")}
+          title="Ir al Formulario"
+          onPress={() => navigation.navigate("Formulario de Inscripcion")}
           color="#005187" // Color del botón
         />
       </View>
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Inscripciones - Consultas de Datos estudiantiles:</Text>
         <Text style={styles.cardText}>
-          Proporciona una tabla con el listado completo de los estudiantes inscritos en el profesorado. Además, permite adjuntar un legajo digital, modificar la información del estudiante 
-          y eliminar su registro en caso de abandono de la carrera.
+          Proporciona una tabla con el listado completo de los estudiantes inscritos en el profesorado. Además, permite
+          adjuntar un legajo digital, modificar la información del estudiante y eliminar su registro en caso de abandono
+          de la carrera.
         </Text>
         <Button
           title="Ir a Consultas"

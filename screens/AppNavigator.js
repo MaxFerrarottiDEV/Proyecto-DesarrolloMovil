@@ -10,8 +10,8 @@ import ProfileScreen from "./ProfileScreen";
 import InscripcionScreen from "./InscripcionScreen";
 import InscFormScreen from "./InscFormScreen";
 import GuiaScreen from "./GuiaScreen";
-import RegisterScreen from "./RegisterScreen";
-import LoginScreen from "./LoginScreen";
+//import RegisterScreen from "./RegisterScreen";
+//import LoginScreen from "./LoginScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -51,6 +51,7 @@ export default function AppNavigator() {
         })}
       >
         {/* Pantalla de Inicio con icono "home" */}
+        {/*
         <Tab.Screen 
           name="Logins" 
           component={LoginScreen} 
@@ -69,6 +70,7 @@ export default function AppNavigator() {
             tabBarButton: () => null
           }} 
           />
+        */}
         <Tab.Screen
           name="Inicio"
           component={HomeScreen}
@@ -111,6 +113,7 @@ export default function AppNavigator() {
           component={InscFormScreen}
           options={{ tabBarButton: () => null }}
         />
+        {/*
         <Tab.Screen
           name="Registro"
           component={RegisterScreen}
@@ -121,6 +124,7 @@ export default function AppNavigator() {
           component={LoginScreen}
           options={{ tabBarButton: () => null }}
         />      
+        */}
       </Tab.Navigator>
     </NavigationContainer>
   );

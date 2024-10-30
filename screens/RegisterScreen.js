@@ -1,10 +1,12 @@
 /* eslint-disable prettier/prettier */
+/*
 import React, { useState } from 'react';
 import { View, Text, TextInput,StyleSheet, Alert,TouchableOpacity,Image} from 'react-native';
 import hideIcon from '../assets/hide-solid-24.png';
 import showIcon from '../assets/show-solid-24.png';
-
+*/
 //modulos firebase 
+/*
 import appFirebase from './firebase';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'; 
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
@@ -180,3 +182,4 @@ const styles = StyleSheet.create({
 });
 
 export default RegisterScreen;
+*/

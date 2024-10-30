@@ -41,4 +41,3 @@ export default function App() {
   // Retornar el AppNavigator cuando las fuentes estén cargadas
   return <AppNavigator />;
 }
-
