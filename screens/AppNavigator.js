@@ -10,6 +10,7 @@ import ProfileScreen from "./ProfileScreen";
 import InscripcionScreen from "./InscripcionScreen";
 import InscFormScreen from "./InscFormScreen";
 import GuiaScreen from "./GuiaScreen";
+import EditarInscripcion from "./EditarInsc";
 //import RegisterScreen from "./RegisterScreen";
 //import LoginScreen from "./LoginScreen";
 
@@ -111,6 +112,11 @@ export default function AppNavigator() {
         <Tab.Screen
           name="Formulario de Inscripcion"
           component={InscFormScreen}
+          options={{ tabBarButton: () => null }}
+        />
+        <Tab.Screen
+          name="EditarInscripcion"
+          component={EditarInscripcion}
           options={{ tabBarButton: () => null }}
         />
         {/*

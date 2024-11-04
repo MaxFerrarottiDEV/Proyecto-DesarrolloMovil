@@ -11,9 +11,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Inscripciones - Formulario de Inscripcion:</Text>
         <Text style={styles.cardText}>
-          Permite gestionar inscripciones de candidatos mediante un formulario integrado en la plataforma. 
-          Una vez completada la solicitud, esta se registra automáticamente en la tabla de solicitudes para su seguimiento
-          y gestión.
+          Permite a los usuarios registrar y gestionar estudiantes ingresando sus datos personales (como nombre, apellido, DNI y año de inscripción) 
         </Text>
         <Button
           title="Ir al Formulario"
@@ -22,14 +20,12 @@ export default function HomeScreen({ navigation }) {
         />
       </View>
       <View style={styles.card}>
-        <Text style={styles.cardTitle}>Inscripciones - Consultas de Datos estudiantiles:</Text>
+        <Text style={styles.cardTitle}>Inscripciones - Lista de Estudiantes:</Text>
         <Text style={styles.cardText}>
-          Proporciona una tabla con el listado completo de los estudiantes inscritos en el profesorado. Además, permite
-          adjuntar un legajo digital, modificar la información del estudiante y eliminar su registro en caso de abandono
-          de la carrera.
+          Muestra todos los registros de inscripciones almacenados, organizados alfabéticamente. Permite visualizar los datos principales de cada estudiante (nombre, apellido, DNI y año de inscripción), y ofrece funciones para buscar y filtrar por criterios específicos (nombre, apellido, DNI y año). También incluye opciones de acción para editar o eliminar inscripciones, proporcionando un control completo sobre el listado de estudiantes.
         </Text>
         <Button
-          title="Ir a Consultas"
+          title="Ir al Listado"
           onPress={() => navigation.navigate("Inscripciones")}
           color="#005187" // Color del botón
         />

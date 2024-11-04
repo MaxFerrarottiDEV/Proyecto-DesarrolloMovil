@@ -1,40 +1,55 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Button, TextInput, ScrollView, StyleSheet, Alert, TouchableOpacity, Text} from "react-native";
-import { Picker } from '@react-native-picker/picker';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { useNavigation } from "@react-navigation/native"; // Importar navegación
-import { db } from "./fb"; // Revisa que la ruta de importación sea correcta
-import { collection, addDoc } from 'firebase/firestore';
+import { db } from "./fb"; // Asegúrate de que la ruta de importación sea correcta
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { Picker } from "@react-native-picker/picker"; // Importa Picker desde @react-native-picker/picker
 
-const InscFormScreen = () => {
-    const navigation = useNavigation(); // Crear objeto de navegación
+const EditarInscripcion = ({ route, navigation }) => {
+    const { inscripcionId } = route.params;
+
     const [state, setState] = useState({
         nombre: '',
         apellido: '',
         DNI: '',
-        anio: '', // Añadir campo de año de inscripción
+        anio: ''
     });
+
+    useEffect(() => {
+        const fetchInscripcion = async () => {
+            const docRef = doc(db, "inscripciones", inscripcionId);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                setState(docSnap.data()); // Inicializa el estado con los datos de Firestore
+            } else {
+                Alert.alert("No se encontraron los datos del estudiante.");
+            }
+        };
+
+        fetchInscripcion();
+    }, [inscripcionId]);
 
     const handleChangeText = (nombre, value) => {
         setState({ ...state, [nombre]: value });
     };
 
-    const saveData = async () => {
-        if (state.nombre === '' || state.apellido === '' || state.DNI === '' || state.anio === '') {
+    const updateData = async () => {
+        if (state.nombre === '' || state.apellido === '' || state.DNI === '' || state.anioInscripcion === '') {
             Alert.alert("Por favor, completa todos los campos.");
         } else {
             try {
-                await addDoc(collection(db, 'inscripciones'), {
+                const docRef = doc(db, "inscripciones", inscripcionId);
+                await updateDoc(docRef, {
                     nombre: state.nombre,
                     apellido: state.apellido,
                     DNI: state.DNI,
-                    anio: state.anio, // Enviar año de inscripción
+                    anio: state.anio,
                 });
-                Alert.alert("Solicitud añadida exitosamente.");
-                setState({ nombre: '', apellido: '', DNI: '', anio: '' });
+                Alert.alert("Datos actualizados exitosamente.");
+                navigation.navigate('Inscripciones'); // Regresar a la pantalla de inscripciones
             } catch (error) {
-                Alert.alert("Error al guardar la solicitud", error.message);
+                Alert.alert("Error al actualizar los datos", error.message);
             }
         }
     };
@@ -72,10 +87,10 @@ const InscFormScreen = () => {
             </View>
             <View style={styles.inputGroup}>
                 <Picker
-                    selectedValue={state.anio}
-                    onValueChange={(value) => handleChangeText('anio', value)}
+                    selectedValue={state.anio} // Asegúrate de que este valor se inicialice correctamente
+                    onValueChange={(itemValue) => handleChangeText('anio', itemValue)}
                 >
-                    <Picker.Item label="-Selecciona el Año de Inscripción-" value="" />
+                    <Picker.Item label="-Selecciona el año de inscripción-" value="" />
                     <Picker.Item label="Primer Año" value="Primer Año" />
                     <Picker.Item label="Segundo Año" value="Segundo Año" />
                     <Picker.Item label="Tercer Año" value="Tercer Año" />
@@ -83,7 +98,7 @@ const InscFormScreen = () => {
                 </Picker>
             </View>
             <View style={styles.inputGroup}>
-                <Button title="Agregar Estudiante" onPress={saveData} />
+                <Button title="Actualizar solicitud" onPress={updateData} />
             </View>
         </ScrollView>
     );
@@ -104,5 +119,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default InscFormScreen;
+export default EditarInscripcion;
 
