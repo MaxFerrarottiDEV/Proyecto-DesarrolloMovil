@@ -6,7 +6,7 @@ export default function ProfileScreen() {
   return (
     <View style={styles.container}>
       <Image
-        source={require('./assets/perfil.png')} // Ruta de la imagen
+        source={require('../assets/perfil.png')} // Ruta de la imagen
         style={styles.image}  // Estilos para la imagen
       />
       <Text style={styles.nombre_perfil}>Hola, (nombre de usuario)</Text>
@@ -14,11 +14,6 @@ export default function ProfileScreen() {
         {/* Hacer el texto pulsable con TouchableOpacity */}
         <TouchableOpacity onPress={() => alert("Funcion en progreso...")}>
           <Text style={styles.change_password}>Cambiar contraseña</Text>
-        </TouchableOpacity>
-
-        {/* Hacer el texto pulsable con TouchableOpacity */}
-        <TouchableOpacity onPress={() => alert("Funcion en progreso...")}>
-          <Text style={styles.change_username}>Cambiar nombre de usuario</Text>
         </TouchableOpacity>
 
       <Button
@@ -53,11 +48,5 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline', // Subrayar el texto
     marginBottom: 20, // Espacio debajo del texto
   },
-  change_username: {
-    fontSize: 16, // Tamaño de la fuente (ajustable)
-    textAlign: 'right', // Alinea el texto a la derecha
-    color: "#0000ff", // Añadir color para distinguirlo como un link
-    textDecorationLine: 'underline', // Subrayar el texto
-    marginBottom: 30, // Espacio debajo del texto
-  },
+
 });

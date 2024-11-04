@@ -1,4 +1,6 @@
-{
+/* eslint-disable prettier/prettier */
+import 'dotenv/config'
+export default{
   "expo": {
     "name": "CRIOS",
     "slug": "CRIOS",
@@ -25,6 +27,14 @@
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    extra: {
+      apiKey: process.env.APY_KEY,
+      authDomain: process.env.AUTH_DOMAIN,
+      projectId: process.env.PROJECT_ID,
+      storageBucket: process.env.STORAGE_BUCKET,
+      messagingSenderId: process.env.MESSAGING_SENDER_ID,
+      appId: process.env.APP_ID
+    }
   }
 }
