@@ -5,22 +5,22 @@ import { View, Text, StyleSheet, Button, Image, TouchableOpacity,} from "react-n
 export default function ProfileScreen() {
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/perfil.png')} // Ruta de la imagen
-        style={styles.image}  // Estilos para la imagen
-      />
-      <Text style={styles.nombre_perfil}>Hola, (nombre de usuario)</Text>
-
-        {/* Hacer el texto pulsable con TouchableOpacity */}
-        <TouchableOpacity onPress={() => alert("Funcion en progreso...")}>
-          <Text style={styles.change_password}>Cambiar contraseña</Text>
-        </TouchableOpacity>
-
-      <Button
-        title="Cerrar Sesión"
-        onPress={() => alert("Cerrando Sesion...")}
-        color="#ff0000" // Color del botón
-      />
+      <View style={styles.card}>
+        <Image
+          source={require('../assets/perfil.png')} // Ruta de la imagen
+          style={styles.image}  // Estilos para la imagen
+        />
+        <Text style={styles.nombre_perfil}>Hola, (nombre de usuario)</Text>
+          {/* Hacer el texto pulsable con TouchableOpacity */}
+          <TouchableOpacity onPress={() => alert("Funcion en progreso...")}>
+            <Text style={styles.change_password}>Cambiar contraseña</Text>
+          </TouchableOpacity>
+        <Button
+          title="Cerrar Sesión"
+          onPress={() => alert("Cerrando Sesion...")}
+          color="#ff0000" // Color del botón
+        />
+      </View>
     </View>
   );
 }
@@ -48,5 +48,16 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline', // Subrayar el texto
     marginBottom: 20, // Espacio debajo del texto
   },
-
+  card: {
+    width: '95%',
+    backgroundColor: '#ffffff', // Color de fondo de la carta
+    padding: 20,
+    marginBottom: 20, // Espacio debajo de la carta
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 10, // Añadir sombra en Android
+  },
 });
