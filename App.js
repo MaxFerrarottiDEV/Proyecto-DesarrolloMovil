@@ -1,35 +1,43 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, Button } from "react-native";
+/* eslint-disable prettier/prettier */
+import React, { useEffect } from "react";
+import { Text, View, ActivityIndicator } from "react-native";
+import AppNavigator from "./screens/AppNavigator";
+import { useFonts, Rubik_400Regular } from "@expo-google-fonts/rubik";
+import * as SplashScreen from "expo-splash-screen";
 
-import saludo from "./assets/saludo.jpg";
+SplashScreen.preventAutoHideAsync(); // Prevenir que la pantalla de carga se oculte automáticamente
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <StatusBar style="light" />
-      <Image
-        source={saludo}
-        style={{
-          width: 100,
-          height: 100,
-          resizeMode: "center",
-        }}
-      />
-      <Text>Hola, Bienvenido a mi primera APP</Text>
-      <StatusBar style="auto" />
-      <Button
-        title="Boton Nativo - Pulsa aquí"
-        onPress={() => alert("Funcion en progreso...")}
-      />
-    </View>
-  );
-}
+  // Cargar la fuente Rubik
+  let [fontsLoaded] = useFonts({
+    Rubik_400Regular,
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+  // Manejar la pantalla de carga
+  useEffect(() => {
+    const hideSplashScreen = async () => {
+      if (fontsLoaded) {
+        await SplashScreen.hideAsync(); // Ocultar la pantalla de carga cuando las fuentes estén listas
+      }
+    };
+
+    hideSplashScreen();
+  }, [fontsLoaded]); // Ejecutar este efecto cuando las fuentes cambien
+
+  // Aplicar Rubik como fuente predeterminada en todos los Text
+  const defaultTextProps = Text.defaultProps || {};
+  defaultTextProps.style = { fontFamily: "Rubik_400Regular" };
+  Text.defaultProps = defaultTextProps;
+
+  // Mostrar una pantalla de carga temporal si las fuentes no están listas
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#0000ff" /> 
+      </View>
+    );
+  }
+
+  // Retornar el AppNavigator cuando las fuentes estén cargadas
+  return <AppNavigator />;
+}
