@@ -1,20 +1,16 @@
 /* eslint-disable prettier/prettier */
-/*
+
 import React, { useState } from 'react';
 import { View, Text, TextInput,StyleSheet, Alert,TouchableOpacity,Image} from 'react-native';
 import hideIcon from '../assets/hide-solid-24.png';
 import showIcon from '../assets/show-solid-24.png';
-*/
-//modulos firebase 
-/*
-import appFirebase from './firebase';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import appFirebase from './fb';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'; 
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
 const auth = getAuth(appFirebase);
 const db = getFirestore(appFirebase);
-
-
 
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -32,11 +28,11 @@ const RegisterScreen = ({ navigation }) => {
         Alert.alert('Las contraseñas no coinciden');
       } else {
         try {
-          // Registrar el usuario 
+          
           const userCredential = await createUserWithEmailAndPassword(auth, email, password);
           const user = userCredential.user;
 
-          // 2. Almacenar datos adicionales en Firestore
+          
           await setDoc(doc(db, 'usuarios', user.uid), {
             name: name,
             apellido: Apellido,
@@ -44,7 +40,7 @@ const RegisterScreen = ({ navigation }) => {
             email: email,
           });
           Alert.alert('Registro exitoso');
-          navigation.navigate('Logins'); // Navegar a la pantalla de Login
+          navigation.navigate('Login'); 
         } catch (error) {
           if (error.code === 'auth/email-already-in-use') {
             Alert.alert('Error', 'El correo electrónico ya existe.');
@@ -60,7 +56,14 @@ const RegisterScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-16gLaJKcDHVHbccbo9ayPsopB6gA1pZB888m8q6g2T8x6kBm
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 15, marginBottom: 10}}>
+              <Ionicons name="arrow-back-sharp" size={24} color="black" />
+              <Text style={{fontSize: 16, marginLeft: 8 }}>
+                  Volver
+              </Text>
+          </View>
+      </TouchableOpacity>
       <TextInput
         style={styles.inputContainer}
         placeholder="Nombre"
@@ -182,4 +185,3 @@ const styles = StyleSheet.create({
 });
 
 export default RegisterScreen;
-*/
