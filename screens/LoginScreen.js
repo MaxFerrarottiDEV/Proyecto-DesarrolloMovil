@@ -1,15 +1,15 @@
 /* eslint-disable prettier/prettier */
-/*
+
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Alert, Image, TouchableOpacity, ScrollView } from 'react-native';
-*/
+
 //modulos firebase 
-/*
+
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; 
-import appFirebase from './firebase';
-*/
+import appFirebase from './fb';
+
 //import imagenes
-/*
+
 import logo from '../assets/CriosF.png';
 import usuario from '../assets/usuario.png';
 import candado from '../assets/candado3.png';
@@ -18,7 +18,6 @@ import showIcon from '../assets/show-solid-24.png';
 
 
 const auth = getAuth(appFirebase); //inicializar firebase
-
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -29,10 +28,10 @@ const LoginScreen = ({ navigation }) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       
-      Alert.alert('Login exitoso');
-      navigation.navigate('Home'); 
+      Alert.alert('Se ha iniciado sesión correctamente.');
+      navigation.navigate('Inicio'); 
     } catch (error) {
-      Alert.alert('Error en el login', error.message);
+      Alert.alert('Error al intentar iniciar sesión.', error.message);
     }
   };
 
@@ -147,4 +146,3 @@ const styles = StyleSheet.create({
 });
 
 export default LoginScreen;
-*/

@@ -5,14 +5,16 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { Text, TouchableOpacity, View, Image } from "react-native"; // Agregamos Image
 import FontAwesome from "react-native-vector-icons/FontAwesome"; // Importamos FontAwesome
+
+//screens
 import HomeScreen from "./HomeScreen";
 import ProfileScreen from "./ProfileScreen";
 import InscripcionScreen from "./InscripcionScreen";
 import InscFormScreen from "./InscFormScreen";
 import GuiaScreen from "./GuiaScreen";
 import EditarInscripcion from "./EditarInsc";
-//import RegisterScreen from "./RegisterScreen";
-//import LoginScreen from "./LoginScreen";
+import RegisterScreen from "./RegisterScreen";
+import LoginScreen from "./LoginScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -36,8 +38,7 @@ export default function AppNavigator() {
                 style={{ width: 31, height: 30, marginRight: 2 }} // Ajustar el tamaño del icono
               />
             </View>
-          ),
-          
+          ),         
           // Botón de perfil a la derecha del header
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate('Perfil')}>
@@ -52,26 +53,25 @@ export default function AppNavigator() {
         })}
       >
         {/* Pantalla de Inicio con icono "home" */}
-        {/*
+
         <Tab.Screen 
-          name="Logins" 
+          name="Login" 
           component={LoginScreen} 
           options={{
-            headerStyle: { backgroundColor: '#005187' },
-            headerTintColor: '#fff', // Cambia el color del texto
-            tabBarButton: () => null
+            headerShown: false,
+            tabBarStyle: { display: 'none' },
+            tabBarButton: () => null,
           }} 
         />
         <Tab.Screen  
           name="Register" 
           component={RegisterScreen}
           options={{
-            headerStyle: { backgroundColor: '#005187' },
-            headerTintColor: '#005187',
-            tabBarButton: () => null
+            headerShown: false,
+            tabBarStyle: { display: 'none' },
+            tabBarButton: () => null,
           }} 
           />
-        */}
         <Tab.Screen
           name="Inicio"
           component={HomeScreen}
@@ -81,7 +81,6 @@ export default function AppNavigator() {
             ),
           }}
         />
-
         {/* Pantalla de Solicitudes con icono "list" */}
         <Tab.Screen
           name="Inscripciones"
@@ -92,7 +91,6 @@ export default function AppNavigator() {
             ),
           }}
         />
-
         {/* Pantalla de Consultas con icono "list-alt" */}
         <Tab.Screen
           name="Guias"
@@ -103,7 +101,6 @@ export default function AppNavigator() {
             ),
           }}
         />
-
         <Tab.Screen
           name="Perfil"
           component={ProfileScreen}
@@ -119,18 +116,6 @@ export default function AppNavigator() {
           component={EditarInscripcion}
           options={{ tabBarButton: () => null }}
         />
-        {/*
-        <Tab.Screen
-          name="Registro"
-          component={RegisterScreen}
-          options={{ tabBarButton: () => null }}
-        />
-        <Tab.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ tabBarButton: () => null }}
-        />      
-        */}
       </Tab.Navigator>
     </NavigationContainer>
   );

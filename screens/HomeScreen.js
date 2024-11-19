@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */ 
 import React from "react";
-import { Text, StyleSheet, Image, ScrollView } from "react-native";
+import { Text, StyleSheet, Image, ScrollView, View } from "react-native";
 
 /* ScrollView envuelve todo el contenido */
 export default function HomeScreen({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.container}> 
       <Text style={styles.title}>Instituto de Formación Docente</Text>
-      <Text style={styles.subtitle}>Profesorado de Educación Especial con Orientación en Sordos e Hipoacúsicos</Text>
+      <Text style={styles.subtitle}>"Profesorado de Educación Especial con Orientación en Sordos e Hipoacúsicos"</Text>
       
       {/* Añadir imagen después del subtítulo */}
       <Image
@@ -16,12 +16,14 @@ export default function HomeScreen({ navigation }) {
       />
       
       {/* Misión de la organización */}
-      <Text style={styles.titulomision}>Misión:</Text>
-      <Text style={styles.mision}>
-        “MEJORAR LA CALIDAD DE VIDA DE LAS PERSONAS CON DISCAPACIDAD AUDITIVA EN LA PROVINCIA DE SALTA A TRAVÉS DE UN SERVICIO INTEGRAL, 
-        BASADO EN LOS VALORES INSTITUCIONALES DE LIBERTAD, HONESTIDAD,
-        RESPETO, SOLIDARIDAD Y EFICIENCIA”
-      </Text>
+      <View style={styles.card}>
+        <Text style={styles.titulomision}>Misión:</Text>
+        <Text style={styles.mision}>
+          “MEJORAR LA CALIDAD DE VIDA DE LAS PERSONAS CON DISCAPACIDAD AUDITIVA EN LA PROVINCIA DE SALTA A TRAVÉS DE UN SERVICIO INTEGRAL, 
+          BASADO EN LOS VALORES INSTITUCIONALES DE LIBERTAD, HONESTIDAD,
+          RESPETO, SOLIDARIDAD Y EFICIENCIA”
+        </Text>
+      </View>
     </ScrollView>
   );
 }
@@ -35,15 +37,22 @@ const styles = StyleSheet.create({
     paddingVertical: 20, // Añadir padding para evitar que el contenido esté pegado a los bordes
   },
   title: {
-    fontSize: 26,
-    fontWeight: "bold",
-    marginBottom: 10, // Espacio entre el título y el subtítulo
+    fontSize: 39,
+    fontWeight: "900",
+    marginBottom: 6, // Espacio entre el título y el subtítulo
+    textAlign: "center",
+    textShadowColor: '#585858', // Color de la sombra
+    textShadowOffset: { width: 1, height: 2 }, // Posición de la sombra
+    textShadowRadius: 4, // Difusión de la sombra
   },
   subtitle: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 17,
+    fontWeight: "600",
     textAlign: "center",
     marginBottom: 20, // Espacio entre el subtítulo y la imagen
+    textShadowColor: '#585858', // Color de la sombra
+    textShadowOffset: { width: 1, height: 1 }, // Posición de la sombra
+    textShadowRadius: 5, // Difusión de la sombra
   },
   image: {
     width: 300,  // Ancho de la imagen
@@ -51,21 +60,8 @@ const styles = StyleSheet.create({
     marginBottom: 25, // Espacio debajo de la imagen
     backgroundColor: "#4d82bc"
   },
-  titulomision:{
-    fontSize: 25,
-    fontStyle: 'italic',
-    fontWeight: 'bold',
-    textDecorationLine: 'underline',
-    marginBottom: 10,
-  },
-  mision: {
-    textAlign: "center",
-    marginBottom: 30,
-    lineHeight: 30,
-    fontStyle: "italic"
-  },
   card: {
-    width: '80%',
+    width: '92%',
     backgroundColor: '#ffffff', // Color de fondo de la carta
     padding: 20,
     borderRadius: 10,
@@ -75,17 +71,21 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    elevation: 5, // Añadir sombra en Android
+    elevation: 10, // Añadir sombra en Android
   },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 10, // Espacio debajo del título
+  titulomision:{
+    fontSize: 24,
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+    marginBottom: 10,
   },
-  cardText: {
-    fontSize: 14,
+  mision: {
     textAlign: "center",
-    marginBottom: 20, // Espacio debajo del texto
+    marginBottom: 20,
+    lineHeight: 28,
+    fontStyle: "italic",
+    fontSize: 15,
+    fontWeight:"600",
   },
 });

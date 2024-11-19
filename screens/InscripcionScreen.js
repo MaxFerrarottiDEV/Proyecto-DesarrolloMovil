@@ -100,10 +100,10 @@ export default function InscripcionScreen({ navigation }) {
       <Text style={styles.cell}>{item.anio}</Text>
       <View style={styles.actions}>
         <TouchableOpacity onPress={() => navigation.navigate('EditarInscripcion', { inscripcionId: item.id })}>
-          <Entypo name="edit" size={24} color="black" />
+          <Entypo name="edit" size={24} color="blue" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleDelete(item.id)}>
-          <MaterialIcons name="delete-forever" size={24} color="black" />
+          <MaterialIcons name="delete-forever" size={24} color="red" />
         </TouchableOpacity>
       </View>
     </View>
@@ -111,45 +111,46 @@ export default function InscripcionScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonRow}>
-        <TouchableOpacity onPress={fetchInscripciones} style={styles.refreshButton}>
-          <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 15 }}>
-             <FontAwesome name="refresh" size={24} color="black" />
-              <Text style={{fontSize: 16, marginLeft: 8 }}>
-                Actualizar
-              </Text>
+      <View style={styles.container2}>
+        <View style={styles.buttonRow}>
+          <TouchableOpacity onPress={fetchInscripciones} style={styles.refreshButton}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 15 }}>
+              <FontAwesome name="refresh" size={24} color="black" />
+                <Text style={{fontSize: 16, marginLeft: 8 }}>
+                  Actualizar
+                </Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.addButtonContainer}>
+            <Button
+              title="Agregar Estudiante"
+              onPress={() => navigation.navigate('Formulario de Inscripcion')}
+              color="#005187"
+            />
           </View>
-        </TouchableOpacity>
-        <View style={styles.addButtonContainer}>
-          <Button
-            title="Agregar Estudiante"
-            onPress={() => navigation.navigate('Formulario de Inscripcion')}
-            color="#005187"
-          />
         </View>
+        
+        {/* Barra de búsqueda */}
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Buscar por Nombre, Apellido o DNI"
+          value={searchText}
+          onChangeText={filterInscripciones}
+        />
+
+        {/* Filtro de Año */}
+        <Picker
+          selectedValue={selectedYear}
+          onValueChange={(itemValue) => filterByYear(itemValue)}
+          style={styles.picker}
+        >
+          <Picker.Item label="Todos los años" value="Todos los años" />
+          <Picker.Item label="Primer Año" value="Primer Año" />
+          <Picker.Item label="Segundo Año" value="Segundo Año" />
+          <Picker.Item label="Tercer Año" value="Tercer Año" />
+          <Picker.Item label="Cuarto Año" value="Cuarto Año" />
+        </Picker>
       </View>
-      
-      {/* Barra de búsqueda */}
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Buscar por Nombre, Apellido o DNI"
-        value={searchText}
-        onChangeText={filterInscripciones}
-      />
-
-      {/* Filtro de Año */}
-      <Picker
-        selectedValue={selectedYear}
-        onValueChange={(itemValue) => filterByYear(itemValue)}
-        style={styles.picker}
-      >
-        <Picker.Item label="Todos los años" value="Todos los años" />
-        <Picker.Item label="Primer Año" value="Primer Año" />
-        <Picker.Item label="Segundo Año" value="Segundo Año" />
-        <Picker.Item label="Tercer Año" value="Tercer Año" />
-        <Picker.Item label="Cuarto Año" value="Cuarto Año" />
-      </Picker>
-
       <Text style={styles.title}>Lista de Estudiantes (A-Z)</Text>
       <View style={styles.headerRow}>
         <Text style={styles.headerCell}>Nombre</Text>
@@ -174,6 +175,17 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 10,
     backgroundColor: "#c4dafa",
+  },
+  container2: {
+    backgroundColor: "#ffffff",
+    width: '100%', // Color de fondo de la carta
+    padding: 2,
+    marginBottom: 20, // Espacio debajo de la carta
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 10, // Añadir sombra en Android
   },
   buttonRow: {
     flexDirection: "row",
@@ -249,5 +261,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#333",
     marginTop: 20,
+  },
+  card: {
+    width: '100%',
+    backgroundColor: '#ffffff', // Color de fondo de la carta
+    padding: 20,
+    borderRadius: 10,
+    marginBottom: 20, // Espacio debajo de la carta
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 10, // Añadir sombra en Android
   },
 });

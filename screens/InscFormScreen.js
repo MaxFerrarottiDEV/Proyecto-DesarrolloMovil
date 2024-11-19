@@ -22,7 +22,7 @@ const InscFormScreen = () => {
 
     const saveData = async () => {
         if (state.nombre === '' || state.apellido === '' || state.DNI === '' || state.anio === '') {
-            Alert.alert("Por favor, completa todos los campos.");
+            Alert.alert("Por favor, complete todos los campos.");
         } else {
             try {
                 await addDoc(collection(db, 'inscripciones'), {
@@ -31,10 +31,10 @@ const InscFormScreen = () => {
                     DNI: state.DNI,
                     anio: state.anio, // Enviar año de inscripción
                 });
-                Alert.alert("Solicitud añadida exitosamente.");
+                Alert.alert("Estudiante agregado exitosamente.");
                 setState({ nombre: '', apellido: '', DNI: '', anio: '' });
             } catch (error) {
-                Alert.alert("Error al guardar la solicitud", error.message);
+                Alert.alert("Error al agregar al estudiante", error.message);
             }
         }
     };
@@ -43,7 +43,7 @@ const InscFormScreen = () => {
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('Inscripciones')}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 15 }}>
-                    <Ionicons name="return-up-back-sharp" size={24} color="black" />
+                    <Ionicons name="arrow-back-sharp" size={24} color="black" />
                     <Text style={{fontSize: 16, marginLeft: 8 }}>
                         Volver
                     </Text>
@@ -82,8 +82,8 @@ const InscFormScreen = () => {
                     <Picker.Item label="Cuarto Año" value="Cuarto Año" />
                 </Picker>
             </View>
-            <View style={styles.inputGroup}>
-                <Button title="Agregar Estudiante" onPress={saveData} />
+            <View style={[styles.inputGroup, styles.buttonContainer]}>
+                <Button title="Añadir Estudiante" onPress={saveData} color="#005187" />
             </View>
         </ScrollView>
     );
@@ -102,7 +102,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#cccccc',
     },
+    buttonContainer: {
+        width: '50%', // Cambia este valor para ajustar el tamaño
+        alignSelf: 'center', // Centra el botón horizontalmente
+    },    
 });
 
 export default InscFormScreen;
-

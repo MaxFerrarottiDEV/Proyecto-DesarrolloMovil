@@ -58,7 +58,7 @@ const EditarInscripcion = ({ route, navigation }) => {
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('Inscripciones')}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 15 }}>
-                    <Ionicons name="return-up-back-sharp" size={24} color="black" />
+                    <Ionicons name="arrow-back-sharp" size={24} color="black" />
                     <Text style={{fontSize: 16, marginLeft: 8 }}>
                         Volver
                     </Text>

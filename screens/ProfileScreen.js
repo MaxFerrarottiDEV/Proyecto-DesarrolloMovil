@@ -1,26 +1,130 @@
 /* eslint-disable prettier/prettier */
-import React from "react";
-import { View, Text, StyleSheet, Button, Image, TouchableOpacity,} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Button, Image, TouchableOpacity, Alert, TextInput, Modal } from "react-native";
+import { getAuth, signOut, updatePassword, onAuthStateChanged } from "firebase/auth"; // Importar Firebase Authentication
+import { useNavigation } from "@react-navigation/native"; // Importar navegación
+import { getFirestore, doc, getDoc } from "firebase/firestore"; // Importar Firestore
 
 export default function ProfileScreen() {
+  const navigation = useNavigation(); // Hook para navegación
+  const auth = getAuth(); // Obtener instancia de Firebase Auth
+  const db = getFirestore(); // Instancia de Firestore
+
+  const [userData, setUserData] = useState({ name: "", apellido: "" }); // Estado para guardar el nombre y apellido del usuario
+  const [modalVisible, setModalVisible] = useState(false); // Estado para controlar el modal
+  const [newPassword, setNewPassword] = useState(""); // Estado para la nueva contraseña
+
+  // Obtener datos del usuario desde Firestore
+  const fetchUserData = async (uid) => {
+    try {
+      const userDoc = doc(db, "usuarios", uid); // Ruta del documento
+      const docSnap = await getDoc(userDoc);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        setUserData({ name: data.name, apellido: data.apellido }); // Actualizar estado con los datos
+      } else {
+        console.error("No se encontró el documento del usuario.");
+        setUserData({ name: "", apellido: "" }); // Reiniciar estado si no se encuentra
+      }
+    } catch (error) {
+      console.error("Error al obtener datos del usuario:", error.message);
+      setUserData({ name: "", apellido: "" }); // Reiniciar estado en caso de error
+    }
+  };
+
+  // Escuchar cambios en el usuario autenticado
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchUserData(user.uid); // Obtener datos del usuario actual
+      } else {
+        setUserData({ name: "", apellido: "" }); // Reiniciar datos si no hay usuario
+      }
+    });
+
+    return unsubscribe; // Limpiar el listener al desmontar
+  }, []);
+
+  // Función para manejar el cierre de sesión
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Cerrar sesión con Firebase
+      Alert.alert("Se ha cerrado la sesión");
+      navigation.navigate("Login"); // Redirigir al LoginScreen
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error.message);
+      alert("Ocurrió un error al intentar cerrar sesión.");
+    }
+  };
+
+  // Función para cambiar la contraseña
+  const handleChangePassword = async () => {
+    try {
+      const user = auth.currentUser; // Obtener usuario actual
+      if (user) {
+        if (newPassword.length < 6) {
+          Alert.alert("Error", "La contraseña debe tener al menos 6 caracteres.");
+          return;
+        }
+        await updatePassword(user, newPassword); // Cambiar contraseña
+        Alert.alert("Éxito", "Contraseña actualizada correctamente.");
+        setModalVisible(false); // Cerrar el modal
+        setNewPassword(""); // Limpiar el campo de entrada
+      } else {
+        Alert.alert("Error", "No se encontró al usuario actual.");
+      }
+    } catch (error) {
+      console.error("Error al cambiar la contraseña:", error.message);
+      Alert.alert("Error", "No se pudo cambiar la contraseña.");
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../assets/perfil.png')} // Ruta de la imagen
-        style={styles.image}  // Estilos para la imagen
-      />
-      <Text style={styles.nombre_perfil}>Hola, (nombre de usuario)</Text>
-
+      <View style={styles.card}>
+        <Image
+          source={require("../assets/perfil.png")} // Ruta de la imagen
+          style={styles.image} // Estilos para la imagen
+        />
+        <Text style={styles.nombre_perfil}>
+          Hola, {userData.name} {userData.apellido}
+        </Text>
         {/* Hacer el texto pulsable con TouchableOpacity */}
-        <TouchableOpacity onPress={() => alert("Funcion en progreso...")}>
+        <TouchableOpacity onPress={() => setModalVisible(true)}>
           <Text style={styles.change_password}>Cambiar contraseña</Text>
         </TouchableOpacity>
+        <Button
+          title="Cerrar Sesión"
+          onPress={handleLogout} // Llamar a la función handleLogout
+          color="#ff0000" // Color del botón
+        />
+      </View>
 
-      <Button
-        title="Cerrar Sesión"
-        onPress={() => alert("Cerrando Sesion...")}
-        color="#ff0000" // Color del botón
-      />
+      {/* Modal para cambiar contraseña */}
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setModalVisible(false)} // Cerrar el modal al presionar atrás
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Cambiar contraseña</Text>
+            <TextInput
+              placeholder="Nueva contraseña"
+              secureTextEntry
+              style={styles.input}
+              value={newPassword}
+              onChangeText={setNewPassword}
+            />
+            <View style={styles.modalButtons}>
+              <Button title="Cancelar" color="#777" onPress={() => setModalVisible(false)} />
+              <Button title="Aceptar" color="#005187" onPress={handleChangePassword} />
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -33,7 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#c4dafa",
   },
   image: {
-    width: 250,  // Ancho de la imagen
+    width: 250, // Ancho de la imagen
     height: 250, // Alto de la imagen
     marginBottom: 2, // Espacio debajo de la imagen
   },
@@ -45,8 +149,50 @@ const styles = StyleSheet.create({
   change_password: {
     fontSize: 16, // Tamaño de la fuente (ajustable)
     color: "#0000ff", // Añadir color para distinguirlo como un link
-    textDecorationLine: 'underline', // Subrayar el texto
+    textDecorationLine: "underline", // Subrayar el texto
     marginBottom: 20, // Espacio debajo del texto
   },
-
+  card: {
+    width: "95%",
+    backgroundColor: "#ffffff", // Color de fondo de la carta
+    padding: 20,
+    marginBottom: 20, // Espacio debajo de la carta
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 10, // Añadir sombra en Android
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    width: "80%",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 20,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 15,
+  },
+  input: {
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 20,
+  },
+  modalButtons: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+  },
 });

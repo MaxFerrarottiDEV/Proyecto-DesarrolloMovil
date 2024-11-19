@@ -6,8 +6,19 @@ import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
 export default function HomeScreen({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.container}> 
-      <Text style={styles.title}>Lista de Funciones</Text>
+      <Text style={styles.title}>Funcionalidades</Text>
       {/* Carta de presentación */}
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>Perfil de usuario</Text>
+        <Text style={styles.cardText}>
+          Permite cambiar la contraseña y cerrar sesión.
+        </Text>
+        <Button
+          title="Ir al Perfil"
+          onPress={() => navigation.navigate("Perfil")}
+          color="#005187" // Color del botón
+        />
+      </View>
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Inscripciones - Formulario de Inscripcion:</Text>
         <Text style={styles.cardText}>
@@ -22,7 +33,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.card}>
         <Text style={styles.cardTitle}>Inscripciones - Lista de Estudiantes:</Text>
         <Text style={styles.cardText}>
-          Muestra todos los registros de inscripciones almacenados, organizados alfabéticamente. Permite visualizar los datos principales de cada estudiante (nombre, apellido, DNI y año de inscripción), y ofrece funciones para buscar y filtrar por criterios específicos (nombre, apellido, DNI y año). También incluye opciones de acción para editar o eliminar inscripciones, proporcionando un control completo sobre el listado de estudiantes.
+          Visualiza todos los registros de inscripciones ordenados alfabéticamente, mostrando nombre, apellido, DNI y año de inscripción. Permite buscar, filtrar y realizar acciones de edición o eliminación para gestionar las inscripciones.
         </Text>
         <Button
           title="Ir al Listado"
@@ -45,20 +56,23 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
     fontWeight: "bold",
-    marginBottom: 15, // Espacio entre el título y el subtítulo
+    marginBottom: 25, // Espacio entre el título y el subtítulo
+    textShadowColor: '#585858', // Color de la sombra
+    textShadowOffset: { width: 1, height: 1 }, // Posición de la sombra
+    textShadowRadius: 5, // Difusión de la sombra
   },
   card: {
     width: '80%',
     backgroundColor: '#ffffff', // Color de fondo de la carta
     padding: 20,
     borderRadius: 10,
-    marginBottom: 20, // Espacio debajo de la carta
+    marginBottom: 30, // Espacio debajo de la carta
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    elevation: 5, // Añadir sombra en Android
+    elevation: 10, // Añadir sombra en Android
   },
   cardTitle: {
     fontSize: 18,
