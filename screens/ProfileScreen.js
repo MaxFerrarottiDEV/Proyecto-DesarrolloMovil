@@ -52,7 +52,6 @@ export default function ProfileScreen() {
   const handleLogout = async () => {
     try {
       await signOut(auth); // Cerrar sesión con Firebase
-      Alert.alert("Se ha cerrado la sesión");
       navigation.navigate("Login"); // Redirigir al LoginScreen
     } catch (error) {
       console.error("Error al cerrar sesión:", error.message);
@@ -83,6 +82,7 @@ export default function ProfileScreen() {
   };
 
   return (
+
     <View style={styles.container}>
       <View style={styles.card}>
         <Image

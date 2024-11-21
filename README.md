@@ -23,3 +23,16 @@ npm install react-native-vector-icons
 npm install firebase
 
 npm install @react-native-picker/picker
+
+
+
+
+
+Willy;
+Corregir login espacio color diferente LISTO
+separar elemnetos de registration 
+
+Dagun;
+Cambiar color de boton de EditarInscripcion LISTO
+Separar elementos de inscripciones (Agregar estudiante) LISTO
+Eliminar alerta de login y de cerrar sesion LISTO

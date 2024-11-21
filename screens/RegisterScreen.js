@@ -59,7 +59,7 @@ const RegisterScreen = ({ navigation }) => {
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 15, marginBottom: 10}}>
               <Ionicons name="arrow-back-sharp" size={24} color="black" />
-              <Text style={{fontSize: 16, marginLeft: 8 }}>
+              <Text style={{fontSize: 20, marginLeft: 8 }}>
                   Volver
               </Text>
           </View>
@@ -133,17 +133,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#fcffff',
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 40,
-  },
   input: {
     height: 40,
     borderColor: '#fcffff',
     borderWidth: 1,
-    marginBottom: 20,
+    marginBottom: 25,  // Aumenté el margen inferior aquí
     paddingHorizontal: 10,
     backgroundColor: '#fcffff',
     textAlign: 'left',
@@ -158,8 +152,10 @@ const styles = StyleSheet.create({
     justifyContent:'flex-end',
     width: '50%',
     alignSelf: 'center',
+    marginTop: 20,  // Agregué un margen superior al botón
   },
   botonTextReg:{
+    fontSize: 22,
     color: 'white',
     textAlign: 'center',
   },
@@ -170,7 +166,7 @@ const styles = StyleSheet.create({
     borderColor: '#005187',
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginBottom: 20,
+    marginBottom: 35,  // Aumenté el margen inferior aquí
     width: '100%',
     backgroundColor: '#fcffff',
     height: 70,
@@ -182,7 +178,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
-})
-;
+});
+
 
 export default RegisterScreen;

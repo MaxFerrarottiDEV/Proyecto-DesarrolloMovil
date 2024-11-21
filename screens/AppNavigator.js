@@ -112,7 +112,7 @@ export default function AppNavigator() {
           options={{ tabBarButton: () => null }}
         />
         <Tab.Screen
-          name="EditarInscripcion"
+          name="Editar Inscripcion"
           component={EditarInscripcion}
           options={{ tabBarButton: () => null }}
         />

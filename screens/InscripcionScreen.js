@@ -7,6 +7,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Picker } from "@react-native-picker/picker"; // Importar el Picker
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function InscripcionScreen({ navigation }) {
   const [inscripciones, setInscripciones] = useState([]);
@@ -84,7 +85,6 @@ export default function InscripcionScreen({ navigation }) {
         item.apellido.toLowerCase().includes(text.toLowerCase()) ||
         item.DNI.includes(text);
       
-      // Incluye todos los años si year es "Todos los años"
       const matchesYear = year === "Todos los años" || item.anio === year;
 
       return matchesText && matchesYear;
@@ -99,7 +99,7 @@ export default function InscripcionScreen({ navigation }) {
       <Text style={styles.cell}>{item.DNI}</Text>
       <Text style={styles.cell}>{item.anio}</Text>
       <View style={styles.actions}>
-        <TouchableOpacity onPress={() => navigation.navigate('EditarInscripcion', { inscripcionId: item.id })}>
+        <TouchableOpacity onPress={() => navigation.navigate('Editar Inscripcion', { inscripcionId: item.id })}>
           <Entypo name="edit" size={24} color="blue" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleDelete(item.id)}>
@@ -121,13 +121,14 @@ export default function InscripcionScreen({ navigation }) {
                 </Text>
             </View>
           </TouchableOpacity>
-          <View style={styles.addButtonContainer}>
-            <Button
-              title="Agregar Estudiante"
-              onPress={() => navigation.navigate('Formulario de Inscripcion')}
-              color="#005187"
-            />
-          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Formulario de Inscripcion')}
+            style={styles.addButton}>
+            <AntDesign name="pluscircleo" size={24} color="white" style={styles.icon} />
+            <Text style={styles.addButtonText}>Agregar Estudiante</Text>
+          </TouchableOpacity>
+
+
         </View>
         
         {/* Barra de búsqueda */}
@@ -191,14 +192,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    paddingHorizontal: 5,           
     marginBottom: 10,
   },
+  
   refreshButton: {
-    flex: 0.3,
+    flex: 1,                   
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 5,
+    paddingVertical: 10,      
+    marginHorizontal: 5,       
   },
+  
   addButtonContainer: {
     flex: 0.5,
   },
@@ -273,6 +278,25 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
-    elevation: 10, // Añadir sombra en Android
+    elevation: 10, 
   },
+  addButton: {
+    flexDirection: 'row', 
+    alignItems: 'center',
+    padding: 10, 
+    backgroundColor: "#005187", 
+    borderRadius: 20, 
+    shadowColor: '#000', 
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 3, 
+  },
+  icon: {
+    marginRight: 5,
+  },
+  addButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: "white",},
 });
