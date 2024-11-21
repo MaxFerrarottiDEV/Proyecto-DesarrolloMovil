@@ -17,6 +17,7 @@ export default{
       "supportsTablet": true
     },
     "android": {
+      package: "com.proyecto.crios", // Aquí agregas el nombre del paquete
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#ffffff"
@@ -29,12 +30,10 @@ export default{
       "expo-font"
     ],
     extra: {
-      apiKey: process.env.APY_KEY,
-      authDomain: process.env.AUTH_DOMAIN,
-      projectId: process.env.PROJECT_ID,
-      storageBucket: process.env.STORAGE_BUCKET,
-      messagingSenderId: process.env.MESSAGING_SENDER_ID,
-      appId: process.env.APP_ID
+        "eas": {
+          "projectId": "2a6d22e0-299c-4c03-becb-3c4100b33a80"
+      }
     }
   }
 }
+
