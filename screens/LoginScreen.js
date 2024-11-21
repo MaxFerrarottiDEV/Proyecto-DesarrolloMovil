@@ -4,20 +4,17 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Alert, Image, TouchableOpacity, ScrollView } from 'react-native';
 
-//modulos firebase 
-
+// Modulos Firebase
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; 
 import appFirebase from './fb';
 
-//import imagenes
-
+// Importar imágenes
 import logo from '../assets/CriosF.png';
 import Feather from '@expo/vector-icons/Feather';
 import hideIcon from '../assets/hide-solid-24.png';
 import showIcon from '../assets/show-solid-24.png';
 
-
-const auth = getAuth(appFirebase); //inicializar firebase
+const auth = getAuth(appFirebase); // Inicializar firebase
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -27,8 +24,6 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      
-      Alert.alert('Se ha iniciado sesión correctamente.');
       navigation.navigate('Inicio'); 
     } catch (error) {
       Alert.alert('Error al intentar iniciar sesión.', error.message);
@@ -36,11 +31,11 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
         <Image source={logo} style={styles.logo} />
         <Text style={styles.title}>Iniciar Sesión</Text>
-        
+
         <View style={styles.inputConteiner}>
           <Feather name="user" size={24} color="black" />
           <TextInput
@@ -52,6 +47,7 @@ const LoginScreen = ({ navigation }) => {
             autoCapitalize="none"
           />
         </View>
+
         <View style={styles.inputConteiner}>
           <Feather name="lock" size={24} color="black" />
           <TextInput
@@ -66,11 +62,12 @@ const LoginScreen = ({ navigation }) => {
             <Image source={isPasswordVisible ? showIcon : hideIcon} style={styles.icono} />
           </TouchableOpacity>
         </View>
+
         <TouchableOpacity onPress={handleLogin} style={styles.botonlogin}>
           <Text style={styles.botonTextlogin}>Iniciar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('Register')}>        
+        <TouchableOpacity onPress={() => navigation.navigate('Register')}>
           <Text style={styles.botonTextR}>¿No tienes cuenta? Regístrate aquí</Text>
         </TouchableOpacity>
       </View>
@@ -79,25 +76,28 @@ const LoginScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1, // Asegura que el contenido dentro del ScrollView ocupe el espacio disponible
+  },
   container: {
     flex: 1,
-    justifyContent: 'right',
+    justifyContent: 'center', // Centra el contenido verticalmente
     paddingHorizontal: 20,
-    backgroundColor: '#fcffff',
+    backgroundColor: '#fcffff', // Fondo claro para toda la pantalla
   },
   logo: {
-    width: 270,  
+    width: 270,
     height: 270,
-    marginTop:70,
+    marginTop: 70,
     marginBottom: 50,
-    alignSelf: 'center', 
+    alignSelf: 'center',
   },
   title: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 40,
-    color:'#005187'
+    color: '#005187',
   },
   input: {
     height: 50,
@@ -120,11 +120,12 @@ const styles = StyleSheet.create({
   },
   botonTextlogin: {
     color: 'white',
+    fontSize: 22,
     textAlign: 'center',
   },
   botonTextR: {
     color: '#005187',
-    fontSize: 16,
+    fontSize: 18,
     textAlign: 'center',
   },
   inputConteiner: {
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
   icono: {
     width: 25,
     height: 25,
-    marginLeft: 1, 
+    marginLeft: 1,
   },
 });
 

@@ -1,10 +1,8 @@
-/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from "react";
-import { View, Button, TextInput, ScrollView, StyleSheet, Alert, TouchableOpacity, Text} from "react-native";
+import { View, Button, TextInput, ScrollView, StyleSheet, Alert, TouchableOpacity, Text } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { db } from "./fb"; // Asegúrate de que la ruta de importación sea correcta
 import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { Picker } from "@react-native-picker/picker"; // Importa Picker desde @react-native-picker/picker
 
 const EditarInscripcion = ({ route, navigation }) => {
     const { inscripcionId } = route.params;
@@ -35,7 +33,7 @@ const EditarInscripcion = ({ route, navigation }) => {
     };
 
     const updateData = async () => {
-        if (state.nombre === '' || state.apellido === '' || state.DNI === '' || state.anioInscripcion === '') {
+        if (state.nombre === '' || state.apellido === '' || state.DNI === '' || state.anio === '') {
             Alert.alert("Por favor, completa todos los campos.");
         } else {
             try {
@@ -54,16 +52,17 @@ const EditarInscripcion = ({ route, navigation }) => {
         }
     };
 
+    const anios = ["Primer Año", "Segundo Año", "Tercer Año", "Cuarto Año"]; // Años disponibles
+
     return (
         <ScrollView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('Inscripciones')}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 15 }}>
                     <Ionicons name="arrow-back-sharp" size={24} color="black" />
-                    <Text style={{fontSize: 16, marginLeft: 8 }}>
-                        Volver
-                    </Text>
+                    <Text style={{ fontSize: 20, marginLeft: 8 }}>Volver</Text>
                 </View>
             </TouchableOpacity>
+
             <View style={styles.inputGroup}>
                 <TextInput 
                     placeholder="Nombre" 
@@ -85,21 +84,26 @@ const EditarInscripcion = ({ route, navigation }) => {
                     onChangeText={(value) => handleChangeText('DNI', value)}
                 />
             </View>
-            <View style={styles.inputGroup}>
-                <Picker
-                    selectedValue={state.anio} // Asegúrate de que este valor se inicialice correctamente
-                    onValueChange={(itemValue) => handleChangeText('anio', itemValue)}
-                >
-                    <Picker.Item label="-Selecciona el año de inscripción-" value="" />
-                    <Picker.Item label="Primer Año" value="Primer Año" />
-                    <Picker.Item label="Segundo Año" value="Segundo Año" />
-                    <Picker.Item label="Tercer Año" value="Tercer Año" />
-                    <Picker.Item label="Cuarto Año" value="Cuarto Año" />
-                </Picker>
+            
+            <Text style={styles.label}>Selecciona el Año de Inscripción:</Text>
+            <View style={styles.listContainer}>
+                {anios.map((item, index) => (
+                    <TouchableOpacity
+                        key={index}
+                        style={[styles.option, state.anio === item && styles.optionSelected]}
+                        onPress={() => handleChangeText("anio", item)}
+                    >
+                        <Text style={[styles.optionText, state.anio === item && styles.optionTextSelected]}>
+                            {item}
+                        </Text>
+                    </TouchableOpacity>
+                ))}
             </View>
-            <View style={styles.inputGroup}>
-                <Button title="Actualizar solicitud" onPress={updateData} />
-            </View>
+
+            <TouchableOpacity style={styles.botonGuardar} onPress={updateData}>
+                <Text style={styles.textoBotonGuardar}>Actualizar solicitud</Text>
+            </TouchableOpacity>
+
         </ScrollView>
     );
 };
@@ -112,12 +116,53 @@ const styles = StyleSheet.create({
     inputGroup: {
         flex: 1,
         padding: 0,
-        marginTop: 30,
-        marginBottom: 15,
+        marginVertical: 25,
         borderBottomWidth: 1,
         borderBottomColor: '#cccccc',
+    },
+    label: {
+        fontSize: 16,
+        fontWeight: "bold",
+        marginVertical: 10,
+    },
+    listContainer: {
+        marginTop: 10,
+    },
+    option: {
+        padding: 15,
+        marginVertical: 5,
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 10,
+        backgroundColor: "#fff",
+    },
+    optionSelected: {
+        borderColor: "#005187",
+        backgroundColor: "#eaf4fb",
+    },
+    optionText: {
+        fontSize: 16,
+        color: "#333",
+    },
+    optionTextSelected: {
+        fontWeight: "bold",
+        color: "#005187",
+    },
+    botonGuardar: {
+        marginTop: 40,
+        marginBottom: 40,
+        padding: 15,
+        borderRadius: 20, 
+        backgroundColor: "#005187", 
+        width: "50%", 
+        alignSelf: "center", 
+        alignItems: "center", 
+    },
+    textoBotonGuardar: {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 20,
     },
 });
 
 export default EditarInscripcion;
-
