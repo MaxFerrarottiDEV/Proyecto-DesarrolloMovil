@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
 
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Alert, Image, TouchableOpacity, ScrollView } from 'react-native';
@@ -11,8 +12,7 @@ import appFirebase from './fb';
 //import imagenes
 
 import logo from '../assets/CriosF.png';
-import usuario from '../assets/usuario.png';
-import candado from '../assets/candado3.png';
+import Feather from '@expo/vector-icons/Feather';
 import hideIcon from '../assets/hide-solid-24.png';
 import showIcon from '../assets/show-solid-24.png';
 
@@ -42,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.title}>Iniciar Sesión</Text>
         
         <View style={styles.inputConteiner}>
-          <Image source={usuario} style={styles.icono} />
+          <Feather name="user" size={24} color="black" />
           <TextInput
             style={styles.input}
             placeholder="Email"
@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
           />
         </View>
         <View style={styles.inputConteiner}>
-          <Image source={candado} style={styles.icono} />
+          <Feather name="lock" size={24} color="black" />
           <TextInput
             style={styles.input}
             placeholder="Contraseña"

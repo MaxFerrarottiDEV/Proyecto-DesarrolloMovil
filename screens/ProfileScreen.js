@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity, Alert, TextInput, Modal } from "react-native";
 import { getAuth, signOut, updatePassword, onAuthStateChanged } from "firebase/auth"; // Importar Firebase Authentication
