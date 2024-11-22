@@ -23,36 +23,47 @@ const RegisterScreen = ({ navigation }) => {
   const [isConfiPasswordVisible, setIsConfiPasswordVisible] = useState(false);
 
   const handleRegister = async () => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/; // 6 caracteres mínimos, al menos una mayúscula, una minúscula y un número.
+  
     if (name && email && password && dni && Apellido && ConfiPassword) {
+      if (!passwordRegex.test(password)) {
+        Alert.alert(
+          'Contraseña inválida',
+          'La contraseña debe tener al menos 6 caracteres, incluyendo una letra mayúscula, una letra minúscula y un número.'
+        );
+        return;
+      }
+  
       if (password !== ConfiPassword) {
         Alert.alert('Las contraseñas no coinciden');
-      } else {
-        try {
-          
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-          const user = userCredential.user;
-
-          
-          await setDoc(doc(db, 'usuarios', user.uid), {
-            name: name,
-            apellido: Apellido,
-            dni: dni,
-            email: email,
-          });
-          Alert.alert('Registro exitoso');
-          navigation.navigate('Login'); 
-        } catch (error) {
-          if (error.code === 'auth/email-already-in-use') {
-            Alert.alert('Error', 'El correo electrónico ya existe.');
-          } else {
-            Alert.alert('Error en el registro', error.message);
-          };
+        return;
+      }
+  
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+  
+        await setDoc(doc(db, 'usuarios', user.uid), {
+          name: name,
+          apellido: Apellido,
+          dni: dni,
+          email: email,
+        });
+  
+        Alert.alert('Registro exitoso');
+        navigation.navigate('Login'); 
+      } catch (error) {
+        if (error.code === 'auth/email-already-in-use') {
+          Alert.alert('Error', 'El correo electrónico ya existe.');
+        } else {
+          Alert.alert('Error en el registro', error.message);
         }
       }
     } else {
       Alert.alert('Por favor, completa todos los campos');
     }
   };
+  
 
   return (
     <View style={styles.container}>
