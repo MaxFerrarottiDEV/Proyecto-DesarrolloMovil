@@ -15,6 +15,7 @@ export default function ProfileScreen() {
   const [userData, setUserData] = useState({ name: "", apellido: "" }); // Estado para guardar el nombre y apellido del usuario
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar el modal
   const [newPassword, setNewPassword] = useState(""); // Estado para la nueva contraseña
+  const [confirmPassword, setConfirmPassword] = useState(""); // Estado para la confirmación de la contraseña
 
   // Obtener datos del usuario desde Firestore
   const fetchUserData = async (uid) => {
@@ -64,14 +65,28 @@ export default function ProfileScreen() {
     try {
       const user = auth.currentUser; // Obtener usuario actual
       if (user) {
-        if (newPassword.length < 6) {
-          Alert.alert("Error", "La contraseña debe tener al menos 6 caracteres.");
+        // Verificar si las contraseñas coinciden
+        if (newPassword !== confirmPassword) {
+          Alert.alert("Error", "Las contraseñas no coinciden.");
           return;
         }
-        await updatePassword(user, newPassword); // Cambiar contraseña
+
+        // Validar los requisitos de la contraseña
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/; // Al menos una minúscula, una mayúscula, un número y mínimo 6 caracteres
+      if (!passwordRegex.test(newPassword)) {
+        Alert.alert(
+          "Error",
+          "La contraseña debe tener al menos 6 caracteres, una mayúscula, una minúscula y un número."
+        );
+        return;
+      }
+
+        // Actualizar la contraseña
+        await updatePassword(user, newPassword);
         Alert.alert("Éxito", "Contraseña actualizada correctamente.");
         setModalVisible(false); // Cerrar el modal
-        setNewPassword(""); // Limpiar el campo de entrada
+        setNewPassword(""); // Limpiar el campo de nueva contraseña
+        setConfirmPassword(""); // Limpiar el campo de confirmación de contraseña
       } else {
         Alert.alert("Error", "No se encontró al usuario actual.");
       }
@@ -80,6 +95,7 @@ export default function ProfileScreen() {
       Alert.alert("Error", "No se pudo cambiar la contraseña.");
     }
   };
+
 
   return (
 
@@ -113,6 +129,8 @@ export default function ProfileScreen() {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Cambiar contraseña</Text>
+
+            {/* Campo de nueva contraseña */}
             <TextInput
               placeholder="Nueva contraseña"
               secureTextEntry
@@ -120,6 +138,16 @@ export default function ProfileScreen() {
               value={newPassword}
               onChangeText={setNewPassword}
             />
+
+            {/* Campo de confirmación de contraseña */}
+            <TextInput
+              placeholder="Confirmar contraseña"
+              secureTextEntry
+              style={styles.input}
+              value={confirmPassword}
+              onChangeText={setConfirmPassword}
+            />
+
             <View style={styles.modalButtons}>
               <Button title="Cancelar" color="#777" onPress={() => setModalVisible(false)} />
               <Button title="Aceptar" color="#005187" onPress={handleChangePassword} />
@@ -168,33 +196,31 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
   modalContent: {
-    width: "80%",
-    backgroundColor: "#fff",
-    borderRadius: 10,
+    backgroundColor: 'white',
     padding: 20,
-    alignItems: "center",
+    borderRadius: 10,
+    width: '80%',
   },
   modalTitle: {
     fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 15,
-  },
-  input: {
-    width: "100%",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    padding: 10,
+    fontWeight: 'bold',
     marginBottom: 20,
   },
+  input: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 15,
+    paddingLeft: 10,
+  },
   modalButtons: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 });
