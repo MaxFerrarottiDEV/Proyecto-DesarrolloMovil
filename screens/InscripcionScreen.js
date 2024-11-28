@@ -48,9 +48,8 @@ export default function InscripcionScreen({ navigation }) {
       "Eliminar inscripción",
       "¿Desea eliminar a este estudiante de la lista?",
       [
-        { text: "No", style: "cancel" },
         {
-          text: "Sí",
+          text: "Sí", 
           onPress: async () => {
             try {
               await deleteDoc(doc(db, "inscripciones", id));
@@ -61,12 +60,18 @@ export default function InscripcionScreen({ navigation }) {
               console.error("Error al eliminar inscripción:", error);
             }
           },
-          style: "destructive",
+          style: "destructive", // Color rojo en Android
+        },
+        { 
+          text: "No", 
+          style: "cancel", 
         },
       ],
       { cancelable: true }
     );
   };
+  
+  
 
   const filterInscripciones = (text) => {
     setSearchText(text);
